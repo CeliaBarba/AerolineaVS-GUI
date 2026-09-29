@@ -6,13 +6,15 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class EvaluadorTarifasTest {
 
+    private final IPricingService pricingService = new PricingServiceImpl();
+
     @Test
     void debeAplicarPajarilloAMenorConSeisVuelos() {
         ClientePotencial cliente = new ClientePotencial(
                 17, 6, TipoViajero.MENOR, ClaseVuelo.TURISTA, RegionDestino.OTRA, 0, false, true
         );
 
-        assertEquals(Tarifa.PAJARILLO, EvaluadorTarifas.evaluar(cliente).tarifa());
+        assertEquals(Tarifa.PAJARILLO, pricingService.evaluar(cliente).tarifa());
     }
 
     @Test
@@ -21,7 +23,7 @@ public class EvaluadorTarifasTest {
                 17, 6, TipoViajero.GENERAL, ClaseVuelo.TURISTA, RegionDestino.OTRA, 0, false, true
         );
 
-        assertEquals(Tarifa.SIN_TARIFA, EvaluadorTarifas.evaluar(cliente).tarifa());
+        assertEquals(Tarifa.SIN_TARIFA, pricingService.evaluar(cliente).tarifa());
     }
 
     @Test
@@ -31,7 +33,7 @@ public class EvaluadorTarifasTest {
                 RegionDestino.OTRA, 0, false, true
         );
 
-        assertEquals(Tarifa.GORRION, EvaluadorTarifas.evaluar(cliente).tarifa());
+        assertEquals(Tarifa.GORRION, pricingService.evaluar(cliente).tarifa());
     }
 
     @Test
@@ -41,7 +43,7 @@ public class EvaluadorTarifasTest {
                 RegionDestino.OTRA, 15000, false, true
         );
 
-        assertEquals(Tarifa.VIAJA_AHORA_QUE_PUEDES, EvaluadorTarifas.evaluar(cliente).tarifa());
+        assertEquals(Tarifa.VIAJA_AHORA_QUE_PUEDES, pricingService.evaluar(cliente).tarifa());
     }
 
     @Test
@@ -51,7 +53,7 @@ public class EvaluadorTarifasTest {
                 RegionDestino.OTRA, 18000, false, false
         );
 
-        assertEquals(Tarifa.ATREVIENDOSE_A_SALTAR_DEL_NIDO, EvaluadorTarifas.evaluar(cliente).tarifa());
+        assertEquals(Tarifa.ATREVIENDOSE_A_SALTAR_DEL_NIDO, pricingService.evaluar(cliente).tarifa());
     }
 
     @Test
@@ -61,7 +63,7 @@ public class EvaluadorTarifasTest {
                 RegionDestino.EUROPA, 25000, true, false
         );
 
-        assertEquals(Tarifa.CONOCE_EUROPA_CON_TUS_PEQUES, EvaluadorTarifas.evaluar(cliente).tarifa());
+        assertEquals(Tarifa.CONOCE_EUROPA_CON_TUS_PEQUES, pricingService.evaluar(cliente).tarifa());
     }
 
     @Test
@@ -71,7 +73,7 @@ public class EvaluadorTarifasTest {
                 RegionDestino.EUROPA, 25000, false, false
         );
 
-        assertEquals(Tarifa.CONOCE_EUROPA, EvaluadorTarifas.evaluar(cliente).tarifa());
+        assertEquals(Tarifa.CONOCE_EUROPA, pricingService.evaluar(cliente).tarifa());
     }
 
     @Test
@@ -81,7 +83,7 @@ public class EvaluadorTarifasTest {
                 RegionDestino.ASIA, 45000, false, false
         );
 
-        assertEquals(Tarifa.CONOCE_EL_MUNDO, EvaluadorTarifas.evaluar(cliente).tarifa());
+        assertEquals(Tarifa.CONOCE_EL_MUNDO, pricingService.evaluar(cliente).tarifa());
     }
 
     @Test
@@ -91,7 +93,7 @@ public class EvaluadorTarifasTest {
                 RegionDestino.OTRA, 10000, false, true
         );
 
-        assertEquals(Tarifa.SIN_TARIFA, EvaluadorTarifas.evaluar(cliente).tarifa());
+        assertEquals(Tarifa.SIN_TARIFA, pricingService.evaluar(cliente).tarifa());
     }
 
     @Test
@@ -105,8 +107,8 @@ public class EvaluadorTarifasTest {
                 RegionDestino.EUROPA, 35000, false, false
         );
 
-        assertEquals(Tarifa.SIN_TARIFA, EvaluadorTarifas.evaluar(ingresoMinimo).tarifa());
-        assertEquals(Tarifa.SIN_TARIFA, EvaluadorTarifas.evaluar(ingresoMaximo).tarifa());
+        assertEquals(Tarifa.SIN_TARIFA, pricingService.evaluar(ingresoMinimo).tarifa());
+        assertEquals(Tarifa.SIN_TARIFA, pricingService.evaluar(ingresoMaximo).tarifa());
     }
 
     @Test
@@ -116,7 +118,7 @@ public class EvaluadorTarifasTest {
                 RegionDestino.AMERICA, 35000, false, false
         );
 
-        assertEquals(Tarifa.SIN_TARIFA, EvaluadorTarifas.evaluar(cliente).tarifa());
+        assertEquals(Tarifa.SIN_TARIFA, pricingService.evaluar(cliente).tarifa());
     }
 
     @Test
@@ -126,7 +128,7 @@ public class EvaluadorTarifasTest {
                 RegionDestino.AMERICA, 35000.01, false, false
         );
 
-        assertEquals(Tarifa.CONOCE_EL_MUNDO, EvaluadorTarifas.evaluar(cliente).tarifa());
+        assertEquals(Tarifa.CONOCE_EL_MUNDO, pricingService.evaluar(cliente).tarifa());
     }
 
     @Test
@@ -136,6 +138,6 @@ public class EvaluadorTarifasTest {
                 RegionDestino.AMERICA, 35000.01, true, false
         );
 
-        assertEquals(Tarifa.CONOCE_EL_MUNDO_CON_TUS_PEQUES, EvaluadorTarifas.evaluar(cliente).tarifa());
+        assertEquals(Tarifa.CONOCE_EL_MUNDO_CON_TUS_PEQUES, pricingService.evaluar(cliente).tarifa());
     }
 }

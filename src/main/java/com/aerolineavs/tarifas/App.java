@@ -47,7 +47,8 @@ public final class App {
                     edad, vuelos, tipo, clase, destino, ingresos, conNinos, viveConPadres
             );
 
-            ResultadoTarifa resultado = EvaluadorTarifas.evaluar(cliente);
+            IPricingService pricingService = new PricingServiceImpl();
+            ResultadoTarifa resultado = pricingService.evaluar(cliente);
 
             System.out.println("Tarifa recomendada: " + resultado.tarifa().getNombre());
             System.out.println("Descuento: " + resultado.tarifa().getDescuentoPorcentaje() + "%");
